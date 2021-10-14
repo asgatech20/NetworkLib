@@ -18,9 +18,9 @@ object RetrofitModule {
             .create()
     }
 
-    fun provideRetrofit(lang: Constants.Lang, token: String, baseUrl: String): Retrofit? {
+    fun provideRetrofit(lang: Constants.Lang, token: String?, baseUrl: String): Retrofit? {
         val gson = provideGson()
-        val okHttpClient = OkHttpClientModule.okHttpClient(lang, token)
+        val okHttpClient = OkHttpClientModule.okHttpClient(lang, token ?: "")
 
         return if (retrofit == null) {
             try {

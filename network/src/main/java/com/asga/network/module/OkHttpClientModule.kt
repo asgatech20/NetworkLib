@@ -16,6 +16,7 @@ import javax.net.ssl.SSLSession
 object OkHttpClientModule {
     const val LOCALE_KEY = "locale"
     const val TOKEN_KEY = "auth-token"
+    private const val NETWORK_LOG_TAG = "asga-network"
 
     fun okHttpClient(lang: Constants.Lang, token: String): OkHttpClient {
 
@@ -39,7 +40,7 @@ object OkHttpClientModule {
         val httpLoggingInterceptor = HttpLoggingInterceptor(
             object : HttpLoggingInterceptor.Logger {
                 override fun log(message: String) {
-                    log(message)
+                    logMessage(message)
                 }
             })
         httpLoggingInterceptor.level =
@@ -55,7 +56,7 @@ object OkHttpClientModule {
 
 
     private fun logMessage(message: String) {
-        Log.i("asgaHttp", message)
+        Log.i(NETWORK_LOG_TAG, message)
     }
 
     private fun provideInterceptor(lang: Constants.Lang, token: String): Interceptor {
@@ -65,7 +66,8 @@ object OkHttpClientModule {
                 val request: Request = chain.request()
                 val builder: Request.Builder = request.newBuilder()
                 builder.addHeader(LOCALE_KEY, lang.value!!)
-                builder.addHeader(TOKEN_KEY, token.trim { it <= ' ' })
+                if (token.isNotEmpty())
+                    builder.addHeader(TOKEN_KEY, token.trim { it <= ' ' })
                 return chain.proceed(builder.build())
             }
         }
