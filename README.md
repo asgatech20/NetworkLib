@@ -36,6 +36,17 @@ android {
         }
 }
 ```
+You can now get the Retrofit Instance and use it like bellow:
+
+``` kotlin
+    private fun createRetrofit() {
+        val retrofit =
+            RetrofitModule.provideRetrofit(Constants.Lang.EN, null, AppConstants.BASE_URL)
+        val apiInterface = retrofit!!.create(ApiInterface::class.java)
+    }
+```
+
+### Happy Coding
 
 ## Authors
 
