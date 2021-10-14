@@ -50,7 +50,7 @@ You can now get the Retrofit Instance and use it like bellow:
 
 ## Authors
 
-* [Ibrahim Ali](ibrahimali354@gmail.com)
+* [Ibrahim Ali](https://github.com/IbrahimAli2017)
 * [Muhammad Noamany](https://github.com/muhammadnomany25)
 
 
