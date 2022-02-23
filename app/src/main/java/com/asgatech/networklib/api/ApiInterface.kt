@@ -2,7 +2,6 @@ package com.asgatech.networklib.api
 
 import com.asgatech.networklib.model.MockModel
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -14,6 +13,6 @@ import retrofit2.http.Path
 interface ApiInterface {
 
     @GET("todos/{id}")
-    fun getMock(@Path("id") id:Int): Call<MockModel>
+    fun getMock(@Path("id") id: Int): Call<MockModel>
 
 }

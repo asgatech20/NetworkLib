@@ -6,14 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.asga.network.helper.Constants
 import com.asga.network.module.RetrofitModule
 import com.asgatech.networklib.api.ApiInterface
+import com.asgatech.networklib.app.NetworkManager
 import com.asgatech.networklib.constants.AppConstants
 import com.asgatech.networklib.model.MockModel
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    @Inject lateinit var apiInterface: ApiInterface
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,13 +26,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createRetrofit() {
-        val retrofit =
-            RetrofitModule.provideRetrofit(Constants.Lang.EN, null, AppConstants.BASE_URL)
-        val apiInterface = retrofit!!.create(ApiInterface::class.java)
-        sendRequest(apiInterface)
+        sendRequest()
     }
 
-    private fun sendRequest(apiInterface: ApiInterface) {
+    private fun sendRequest() {
         apiInterface.getMock(1).enqueue(object : Callback<MockModel> {
             override fun onResponse(
                 call: Call<MockModel>,

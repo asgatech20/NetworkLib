@@ -46,6 +46,27 @@ You can now get the Retrofit Instance and use it like bellow:
     }
 ```
 
+###  Exception Handling
+ You have three classes to help you create localized exceptions:
+ 1- ApiException class: to create a custom exception class to create a localized exception based on api status code.
+  ex.
+  ``` kotlin
+   val exception = ApiException(lang = "ar", statusCode = 401)
+   val localizedExceptionMsg = exception.message  // this will return a localized message for the exception cause
+   ```
+ 2- NoInternetException class: to create a localized exception in for NO INTERNET case.
+   ex.
+   ``` kotlin
+    val exception = NoInternetException(lang = "ar")
+    val NoInternetExceptionMsg = exception.message  // this will return a localized message for the no netwrok case
+   ```
+
+ 3- UnexpectedException class: to create an exception of unhandled cause.
+   ex.
+   ``` kotlin
+     val exception = UnexpectedException(cause = Exception)  // this will create an exception for unhandled exception
+   ```
+ 
 ### Happy Coding
 
 ## Authors
