@@ -19,21 +19,25 @@ object RetrofitModule {
     }
 
     fun provideRetrofit(lang: Constants.Lang, token: String?, baseUrl: String): Retrofit? {
-        val gson = provideGson()
         val okHttpClient = OkHttpClientModule.okHttpClient(lang, token ?: "")
+        return provideRetrofit(baseUrl,okHttpClient)
 
+    }
+    fun provideRetrofit(baseURL: String,okHttpClient: OkHttpClient):Retrofit?{
+        val gson = provideGson()
         return if (retrofit == null) {
             try {
-                getRetrofit(gson!!, okHttpClient, baseUrl)
+                getRetrofit(gson!!, okHttpClient, baseURL)
             } catch (e: Exception) {
-                getRetrofit(gson!!, okHttpClient, baseUrl)
+                getRetrofit(gson!!, okHttpClient, baseURL)
             }
         } else {
             retrofit
         }
-
     }
+    fun getUnSafeOkHTTP(lang: Constants.Lang, token: String?): OkHttpClient = UnSafeOkHttpClientModule.UnSafeOkHttpClient(lang, token ?: "")
 
+    fun getSafeOkHttp(lang: Constants.Lang, token: String?): OkHttpClient  = OkHttpClientModule.okHttpClient(lang, token ?: "")
     private fun getRetrofit(gson: Gson, okHttpClient: OkHttpClient, baseURL: String): Retrofit? {
         return Retrofit.Builder()
             .baseUrl(baseURL)

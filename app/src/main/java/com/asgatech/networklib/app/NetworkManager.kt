@@ -22,7 +22,7 @@ class NetworkManager {
     @Singleton
     fun createRetrofit(): ApiInterface {
         val retrofit =
-            RetrofitModule.provideRetrofit(Constants.Lang.EN, null, AppConstants.BASE_URL)
+            RetrofitModule.provideRetrofit(AppConstants.BASE_URL,RetrofitModule.getUnSafeOkHTTP(Constants.Lang.EN,null))
         return retrofit!!.create(ApiInterface::class.java)
     }
 
