@@ -43,8 +43,7 @@ object OkHttpClientModule {
                     logMessage(message)
                 }
             })
-        httpLoggingInterceptor.level =
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor
 
     }

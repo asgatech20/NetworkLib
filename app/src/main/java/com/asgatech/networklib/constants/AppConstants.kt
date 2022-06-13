@@ -6,5 +6,5 @@ package com.asgatech.networklib.constants
  * @Date: muhammadnoamany@gmail.com
  */
 object AppConstants {
-    val BASE_URL="https://jsonplaceholder.typicode.com/"
+    var BASE_URL="https://jsonplaceholder.typicode.com/"
 }

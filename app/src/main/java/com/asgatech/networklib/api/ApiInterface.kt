@@ -14,5 +14,7 @@ interface ApiInterface {
 
     @GET("todos/{id}")
     fun getMock(@Path("id") id: Int): Call<MockModel>
+    @GET("todos/{id}")
+    fun getMock2(@Path("id") id: Int): Call<MockModel>
 
 }

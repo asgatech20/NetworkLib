@@ -42,6 +42,7 @@ object UnSafeOkHttpClientModule {
         val apiIUrlInterceptor = provideBaseURLInterceptor()
         return OkHttpClient()
             .newBuilder()
+            .cache(null)
             .addInterceptor(apiIUrlInterceptor)
             .addInterceptor(headerInterceptor)
             .addInterceptor(httpLoggingInterceptor)
@@ -69,8 +70,7 @@ object UnSafeOkHttpClientModule {
                     logMessage(message)
                 }
             })
-        httpLoggingInterceptor.level =
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor
 
     }
